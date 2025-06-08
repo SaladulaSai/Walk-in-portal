@@ -58,7 +58,7 @@ MIDDLEWARE = [
    
 ]
 
-]
+
 
 ROOT_URLCONF = 'jobportal.urls'
 
