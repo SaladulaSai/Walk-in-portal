@@ -1,0 +1,79 @@
+{% comment %} {% extends "users/base.html" %}
+{% block content %}
+<h2>Register</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Register</button>
+</form>
+{% endblock %} {% endcomment %}
+
+
+{% load static %}
+{% load form_tags %}  {# Required for add_class filter #}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register | Walk-in Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-500 via-pink-400 to-blue-500">
+
+    <div class="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-md">
+        <h1 class="text-2xl font-bold mb-4 text-center text-gray-800">🚀 Register to Walk-in Portal</h1>
+
+        {% if form.errors %}
+        <div class="bg-red-100 text-red-700 border border-red-400 px-4 py-3 rounded mb-6">
+            🔴 <strong>Please fix the errors below and try again.</strong>
+        </div>
+        {% endif %}
+
+        <form method="POST" class="space-y-5">
+            {% csrf_token %}
+
+            <div>
+                <label for="id_username" class="block text-gray-700">Username</label>
+                {{ form.username|add_class:"w-full mt-1 px-4 py-2 rounded-xl border " }}
+                {% if form.username.errors %}
+                    <p class="text-sm text-red-600 mt-1">🔴 {{ form.username.errors.0 }}</p>
+                {% endif %}
+            </div>
+
+            <div>
+                <label for="id_email" class="block text-gray-700">Email</label>
+                {{ form.email|add_class:"w-full mt-1 px-4 py-2 rounded-xl border" }}
+                {% if form.email.errors %}
+                    <p class="text-sm text-red-600 mt-1">🔴 {{ form.email.errors.0 }}</p>
+                {% endif %}
+            </div>
+
+            <div>
+                <label for="id_password1" class="block text-gray-700">Password</label>
+                {{ form.password1|add_class:"w-full mt-1 px-4 py-2 rounded-xl border" }}
+                {% if form.password1.errors %}
+                    <p class="text-sm text-red-600 mt-1">🔴 {{ form.password1.errors.0 }}</p>
+                {% endif %}
+            </div>
+
+            <div>
+                <label for="id_password2" class="block text-gray-700">Confirm Password</label>
+                {{ form.password2|add_class:"w-full mt-1 px-4 py-2 rounded-xl border" }}
+                {% if form.password2.errors %}
+                    <p class="text-sm text-red-600 mt-1">🔴 {{ form.password2.errors.0 }}</p>
+                {% endif %}
+            </div>
+
+            <button type="submit"
+                class="w-full py-2 px-4 bg-purple-600 hover:bg-purple-700 text-white rounded-xl font-semibold shadow-md transition-all duration-300">
+                Register
+            </button>
+        </form>
+
+        <p class="mt-6 text-center text-gray-700">
+            Already have an account? <a href="{% url 'login' %}" class="text-blue-600 hover:underline font-medium">Login</a>
+        </p>
+    </div>
+
+</body>
+</html>

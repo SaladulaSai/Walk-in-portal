@@ -1,0 +1,59 @@
+{% comment %} {% extends "users/base.html" %}
+{% block content %}
+<h2>Login</h2>
+<form method="post">
+    {% csrf_token %}
+    <input type="text" name="username" placeholder="Username" required><br>
+    <input type="password" name="password" placeholder="Password" required><br>
+    <button type="submit">Login</button>
+</form>
+{% if error %}<p style="color:red">{{ error }}</p>{% endif %}
+{% endblock %} {% endcomment %}
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login | Walk-in Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-500 via-pink-400 to-blue-500">
+
+    <div class="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-sm">
+        <h1 class="text-2xl font-bold mb-6 text-center text-gray-800">🚀 Login to Walk-in Portal</h1>
+
+        {% if error %}
+            <p class="text-red-500 text-center mb-4">{{ error }}</p>
+        {% endif %}
+
+        <form method="POST" class="space-y-5">
+            {% csrf_token %}
+
+            <div>
+                <label for="username" class="block text-gray-700">Username</label>
+                <input type="text" name="username" id="username"
+                       class="w-full mt-1 px-4 py-2 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400"
+                       required>
+            </div>
+
+            <div>
+                <label for="password" class="block text-gray-700">Password</label>
+                <input type="password" name="password" id="password"
+                       class="w-full mt-1 px-4 py-2 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400"
+                       required>
+            </div>
+
+            <button type="submit"
+                    class="w-full py-2 px-4 bg-purple-600 hover:bg-purple-700 text-white rounded-xl font-semibold shadow-md transition-all duration-300">
+                Login
+            </button>
+        </form>
+
+        <p class="mt-6 text-center text-gray-700">
+            Don’t have an account? <a href="{% url 'register' %}" class="text-blue-600 hover:underline font-medium">Register</a>
+        </p>
+    </div>
+
+</body>
+</html>
