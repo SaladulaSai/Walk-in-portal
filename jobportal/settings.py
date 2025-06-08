@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-3q33adw(!@1niw&)zdu2ynt+(7f8w6pbqun2yzr&(+g)h1!yf-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["walk-in-portal-2.onrender.com"]
 
 
 
